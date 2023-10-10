@@ -5,7 +5,11 @@ import java.util.List;
 
 public class Basket {
 
-  List<Book> basket = new ArrayList<Book>();
+  private List<Book> basket;
+
+  public Basket() {
+    this.basket = new ArrayList<>();
+  }
 
   public List<Book> getBooksInBasket() {
     return basket;
