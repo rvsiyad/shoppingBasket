@@ -8,16 +8,24 @@ public class Checkout {
   public double calculatePrice(Basket basket) {
     double totalPrice = 0.0;
     int numberOfBooks = basket.getBooksInBasket().size();
-    int remainder = numberOfBooks % 3;
-    int calculateDiscount = (numberOfBooks - remainder) / 3;
+    int totalDiscount = 0;
     
     for(Book book: basket.getBooksInBasket()) {
       totalPrice += book.getPrice();
     }
+    
+    if(numberOfBooks >= 10) {
+      int remainderForTen = numberOfBooks % 10;
+      int calculateDiscountTenBooks = (numberOfBooks - remainderForTen) / 10;
+      totalDiscount = calculateDiscountTenBooks * 10;
+    }
 
     if(numberOfBooks >= 3) {
-      // int discountPercent = numberOfBooks / 3;
-      double newTotalPrice = totalPrice * (1 - ((double)calculateDiscount/100));
+      int remainderForThree = numberOfBooks % 3;
+      int calculateDiscountThreeBooks = (numberOfBooks - remainderForThree) / 3;
+      totalDiscount += calculateDiscountThreeBooks;
+      
+      double newTotalPrice = totalPrice * (1 - ((double)totalDiscount/100));
       return newTotalPrice;
     } else {
       return totalPrice;
